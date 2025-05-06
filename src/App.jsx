@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 
@@ -26,6 +26,9 @@ function App() {
     },
   ]);
 
+  //hook do React para gerarmos um id incremental e único para a tarefa
+  const nextId = useRef(4);
+
   function onTaskClick(taskId){
     const newTasks = tasks.map(task => {
       //Quando preciso atualizar o estado de uma tarefa
@@ -41,17 +44,35 @@ function App() {
   
   function onDeleteClick(taskId){
     //Filtra os que não foram clicados para ser deletado
-    const newTasks = tasks.filter((task) => task.id !== taskId);
+    const newTasks = tasks.filter((task) => { 
+      let bool = task.id !== taskId
+      if(bool){
+        return bool
+      }     
+    });
     setTasks(newTasks);
   }
 
+  function onAddTaskSubmit(title, description){
+    
+    const newTask = {
+      id: nextId.current,
+      title: title,
+      description: description,
+      isCompleted: false,
+    };
+    setTasks([...tasks, newTask]);
+    nextId.current += 1;
+    console.log(tasks.length);
+  }
+
   return (
-    <div className="w-screen h-screen bg-amber-700 flex justify-center p-6">
-      <div className="w-[500px]">
-        <h1 className="text-3xl text-slate-300 font-bold text-center">
+    <div className="w-screen h-screen bg-amber-700 flex justify-center p-6 ">
+      <div className="w-[500px] space-y-6">
+        <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Tarefas
         </h1>
-        <AddTasks />
+        <AddTasks onAddTaskSubmit={onAddTaskSubmit} /> 
         <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteClick={onDeleteClick}/>
       </div>
     </div>

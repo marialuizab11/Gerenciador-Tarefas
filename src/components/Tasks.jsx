@@ -2,6 +2,7 @@ import { ChevronRightIcon } from "lucide-react";
 import { TrashIcon } from "lucide-react";
 
 function Tasks({ tasks, onTaskClick, onDeleteClick }){
+    console.log(tasks)
     return (
         <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
             {tasks.map((task) => 
