@@ -1,33 +1,18 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
 
 function App() {
   //State é uma lista
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar React",
-      description: "Ver o vídeo completo do felipe no youtube",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Fazer marketing da loja",
-      description: "Tirar fotos, postar no instagram, responder os clientes",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Ver aula 1 da jornada full stack",
-      description:
-        "No canal da hashtag, ver aula 1 que fala sobre a configuração e utlização do react",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || []);
+
+  //hook do React para salvarmos a task no armazenamento do navegador
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   //hook do React para gerarmos um id incremental e único para a tarefa
-  const nextId = useRef(4);
+  const nextId = useRef(1);
 
   function onTaskClick(taskId){
     const newTasks = tasks.map(task => {
@@ -63,7 +48,6 @@ function App() {
     };
     setTasks([...tasks, newTask]);
     nextId.current += 1;
-    console.log(tasks.length);
   }
 
   return (
