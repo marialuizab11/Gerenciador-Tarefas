@@ -8,8 +8,8 @@ function TaskPage(){
     const title = searchParams.get("title");
     const description = searchParams.get("description");
     return(
-        <div className="w-screen h-screen bg-amber-700 p-6 justify-center">
-            <div className="w-[500px] mx-auto space-y-6 ">
+        <div className="w-screen h-screen bg-amber-700 flex justify-center p-6">
+            <div className="w-[500px] space-y-6 ">
                 <div className="relative mb-6">
                     <button onClick={() => navigate(-1)} className="absolute left-0 bottom-0 text-slate-100">
                         <ChevronLeftIcon />
