@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from "lucide-react";
 import { TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button"
 
 // eslint-disable-next-line react/prop-types
 function Tasks({ tasks, onTaskClick, onDeleteClick }){
@@ -15,6 +16,7 @@ function Tasks({ tasks, onTaskClick, onDeleteClick }){
 
     return (
         <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
+            {/* eslint-disable-next-line react/prop-types */}
             {tasks.map((task) => 
                 (<li key={task.id} className="flex gap-2" >
                     <button 
@@ -26,12 +28,12 @@ function Tasks({ tasks, onTaskClick, onDeleteClick }){
                     {/* () => {return onSeeDetailsClick(task)}
                         Arrow function é uma função que retorna algo
                     */}
-                    <button onClick={() => onSeeDetailsClick(task)} className="bg-red-700 p-2 rounded-md text-white">
+                    <Button onClick={() => onSeeDetailsClick(task)} >
                         <ChevronRightIcon />
-                    </button>
-                    <button onClick={() => onDeleteClick(task.id)} className="bg-red-700 p-2 rounded-md text-white">
+                    </Button>
+                    <Button onClick={() => onDeleteClick(task.id)} >
                         <TrashIcon />
-                    </button>
+                    </Button>
                 </li>
             ))}
         </ul>
