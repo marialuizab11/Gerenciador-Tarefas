@@ -7,3 +7,4 @@ Gerenciador de tarefas.
 - Marcar a tarefa como concluída
 
 Foi usada local storage para armazenamento das tarefas.
+Deploy: https://gerenciador-tarefas-vert.vercel.app/
